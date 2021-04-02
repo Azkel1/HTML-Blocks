@@ -1,0 +1,63 @@
+@font-face {
+    font-family: "Lovelo";
+    src: url("../public/fonts/Lovelo\ Black.otf");
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../public/fonts/Rubik-VariableFont_wght.ttf");
+}
+
+:root {
+    //Colores
+    --red: #ff5757;
+    --purple: #ea68ff;
+    --orange: #ff8148;
+    --yellow: #ffd957;
+    --green: #b3ff80;
+    --light-blue: #5ee2ff;
+    --blue: #5f7fff;
+
+    //Misc
+    --border-radius: 6px;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+    font-family: "Rubik", Segoe UI, sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Lovelo", Segoe UI, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#__next, #__next > div {
+    height: 100%;
+}
+
+#__next > div{
+    display: grid;
+    grid-template-rows: 125px auto 125px;
+}
+
+main {
+    background-image: url("/img/homepage_background.png");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+
+    margin: 1.5em 2em;
+}

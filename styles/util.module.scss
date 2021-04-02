@@ -1,0 +1,19 @@
+.flexContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+}
+
+.button {
+    border: 0;
+    border-radius: var(--border-radius);
+    font-size: 1em;
+    outline: 0;
+
+    cursor: pointer;
+    transition: 0.5s;
+
+    padding: 1em;
+}

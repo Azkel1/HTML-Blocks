@@ -1,0 +1,58 @@
+@import "./functions.scss";
+
+.loginForm {
+    background-color: var(--blue);
+    border-radius: var(--border-radius);
+
+    display: flex;
+    flex-direction: column;
+    
+    padding: 1.5em;
+    width: 350px;
+
+    label {
+        color: white;
+
+        margin-bottom: 0.2em;
+        display: inline-block;
+    }
+
+    input {
+        border: 0;
+        border-radius: var(--border-radius);
+        outline: 0;
+        font-size: 0.9em;
+
+        display: inline-block;
+        
+        padding: 0.7em 0.8em;
+        margin-bottom: 2em;
+    }
+
+    .formSubmitButton {
+        background-color: var(--yellow);
+        font-weight: bold;
+
+        &:hover {
+            background-color: shade(#ffd957, 20%);
+        }
+    }
+
+    .formSwitchButton {
+        background: var(--yellow);
+        border: 0;
+        border-radius: 0 0 5px 5px;
+
+        cursor: pointer;
+        transition: 0.5s;
+        
+        padding: 0.7em;
+        margin-bottom: -35px;
+        position: relative;
+        top: 23px;
+
+        &:hover {
+            background-color: shade(#ffd957, 20%);
+        }
+    }
+}
