@@ -1,0 +1,13 @@
+#sandboxMainContainer {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    grid-template-areas: "tools canvas rendered-content";
+}
+
+@media (max-width: 900px) {
+    #sandboxMainContainer {
+        grid-template-columns: auto;
+        grid-template-rows: 100px 1fr 1fr;
+        grid-template-areas: "tools" "canvas" "rendered-content";
+    }
+}

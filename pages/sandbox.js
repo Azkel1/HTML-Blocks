@@ -1,5 +1,7 @@
 import Head from "next/head"
 import Header from "components/header"
+import SandboxCanvas from "components/canvas"
+import styles from "styles/sandbox.module.scss"
 
 export default function SandboxPage () {
     return (
@@ -10,7 +12,9 @@ export default function SandboxPage () {
             
             <Header page="sandbox"/>
 
-            Texto
+            <main id={ styles.sandboxMainContainer }>
+                <SandboxCanvas />
+            </main>
         </div>
     )
 }

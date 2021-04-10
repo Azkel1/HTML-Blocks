@@ -49,9 +49,9 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
 }
 
-#__next > div{
+#__next > div {
     display: grid;
-    grid-template-rows: 125px auto 125px;
+    grid-template-rows: 125px 1fr auto;
 }
 
 main {

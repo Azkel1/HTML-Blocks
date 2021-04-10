@@ -1,5 +1,5 @@
-import Icon from "./icons"
-import styles from "./header.module.scss"
+import Icon from "components/icons"
+import styles from "components/header.module.scss"
 import Image from "next/image"
 import Link from "next/link"
 
