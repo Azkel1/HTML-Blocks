@@ -1,4 +1,4 @@
-const db = require("../../lib/db").instance;
+const db = require("lib/db").instance;
 
 export default async function handler(req, res) {
     try {

@@ -1,7 +1,7 @@
 import Head from "next/head"
-import Header from "../components/header"
-import styles from "../styles/login.module.scss"
-import utilStyles from "../styles/util.module.scss"
+import Header from "components/header"
+import styles from "styles/login.module.scss"
+import utilStyles from "styles/util.module.scss"
 
 export default function Login () {
     return (
