@@ -1,9 +1,13 @@
+@import "styles/functions.scss";
+
 #canvasContainer {
-    border: 1px solid black;
+    background-color: shade(transparent, 10%);
+    border-radius: var(--border-radius);
     grid-area: canvas;
 
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 #main-canvas {

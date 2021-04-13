@@ -1,7 +1,24 @@
+@import "styles/functions.scss";
+
 #sandboxMainContainer {
     display: grid;
+    gap: 2em;
     grid-template-columns: 100px 1fr 1fr;
     grid-template-areas: "tools canvas rendered-content";
+}
+
+#toolContainer {
+    background-color: shade(transparent, 10%);
+    border-radius: var(--border-radius);
+
+    grid-area: tools;
+}
+
+#renderedContentContainer {
+    background-color: shade(transparent, 10%);
+    border-radius: var(--border-radius);
+
+    grid-area: rendered-content;
 }
 
 @media (max-width: 900px) {
