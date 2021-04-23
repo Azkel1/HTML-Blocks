@@ -1,39 +1,43 @@
+import useUser from 'lib/useUser'
+import fetchJson from 'lib/fetchJson'
+
 import Icon from "components/icons"
 import styles from "components/header.module.scss"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from 'next/router'
 
 export default function Header({ page }) {
-    //Check if the current page is the homepage to show the "Try it!" button
-    const headerButtons = function () {
-        switch (page) {
-            case "home":
-                return (
-                    <div id={ styles.buttonContainer }>
-                        <Link href="/sandbox">
-                            <a className={styles.headerButton}>Pruébalo!</a>
-                        </Link>
+    const { user, mutateUser } = useUser();
+    const router = useRouter();
 
-                        <Link href="/login">
-                            <a className={styles.headerButtonWithIcon}>
-                                Iniciar sesión
+    const headerButtons = function () {
+        return (
+            <div id={styles.buttonContainer}>
+                { page !== "sandbox" &&
+                    <Link href="/sandbox">
+                        <a className={styles.headerButton}>Pruébalo!</a>
+                    </Link>
+                }
+                { page !== "auth" && !user?.isLoggedIn &&
+                    <Link href="/auth">
+                        <a className={styles.headerButtonWithIcon}>
+                            Iniciar sesión
                                 <Icon icon="logIn" />
-                            </a>
-                        </Link>
-                    </div>
-                )
-            case "sandbox":
-                return (
-                    <div id={ styles.buttonContainer }>
-                        <Link href="/login">
-                            <a className={styles.headerButtonWithIcon}>
-                                Iniciar sesión
-                                <Icon icon="logIn" />
-                            </a>
-                        </Link>
-                    </div>
-                )
-        }
+                        </a>
+                    </Link>
+                }
+                { user?.isLoggedIn &&
+                    <Link href="/api/logout">
+                        <a className={styles.headerButton} onClick={ async (e) => {
+                            e.preventDefault();
+                            await mutateUser(fetchJson("/api/logout"));
+                            router.push("/auth");
+                        }}>Cerrar sesión</a>
+                    </Link>
+                }
+            </div>
+        )
     }
 
     return (
@@ -43,7 +47,7 @@ export default function Header({ page }) {
                     <Image src="/svg/HTMLBlocks_logo_min.svg" width="300" height="50" alt="" />
                 </a>
             </Link>
-
+    
             <nav>
                 <ul>
                     <li>
@@ -56,10 +60,10 @@ export default function Header({ page }) {
                             <a>Enlace 2</a>
                         </Link>
                     </li>
-
+    
                 </ul>
             </nav>
-            { headerButtons() }
+            { headerButtons()}
         </header>
     )
 }

@@ -1,6 +1,6 @@
-@use "./functions.scss";
+@use "styles/functions.scss";
 
-.loginForm {
+.form {
     background-color: var(--blue);
     border-radius: var(--border-radius);
 
@@ -34,14 +34,13 @@
         font-weight: bold;
 
         &:hover {
-            background-color: shade(#ffd957, 20%);
+            background-color: functions.shade(#ffd957, 20%);
         }
     }
 
     .formSwitchButton {
         background: var(--yellow);
         border: 0;
-        border-radius: 0 0 5px 5px;
 
         cursor: pointer;
         transition: 0.5s;
@@ -49,10 +48,27 @@
         padding: 0.7em;
         margin-bottom: -35px;
         position: relative;
-        top: 23px;
 
         &:hover {
-            background-color: shade(#ffd957, 20%);
+            background-color: functions.shade(#ffd957, 20%);
         }
     }
+}
+
+#loginForm {
+    #formSwitchToRegister {
+        border-radius: 0 0 5px 5px;
+        top: 22px;
+    }
+}
+
+#registerForm {
+    #formSwitchToLogin {
+        border-radius: 5px 5px 0 0;
+        top: -58px;
+    }
+}
+
+.hidden {
+    display: none;
 }

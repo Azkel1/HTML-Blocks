@@ -1,9 +1,19 @@
+@use "sass:color";
+
 .flexContainer {
     display: flex;
     justify-content: center;
     align-items: center;
 
     height: 100%;
+}
+
+.hideOverflow {
+    overflow: hidden;
+}
+
+.noMargin {
+    margin: 0;
 }
 
 .button {
@@ -16,4 +26,24 @@
     transition: 0.5s;
 
     padding: 1em;
+}
+
+.errorMessage {
+    border: 2px solid var(--red);
+    border-radius: var(--border-radius);
+    background-color: color.scale(#ff5757, $alpha: -20%);
+
+    text-align: center;
+    margin-top: 0;
+    padding: 0.5em 0;
+}
+
+.okMessage {
+    border: 2px solid var(--green);
+    border-radius: var(--border-radius);
+    background-color: color.scale(#b3ff80, $alpha: -20%);
+
+    text-align: center;
+    margin-top: 0;
+    padding: 0.5em 0;
 }
