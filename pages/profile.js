@@ -24,10 +24,10 @@ export default function Profile() {
             <main id={ styles.profile }>
                 <h1 id={ styles.welcomeMessage }>Bienvenido a tu perfil!</h1>
                 
-                <div id={ styles.userCard }>
+                <div id={ styles.userCard }>    {/* Implement ability to change user name and image */}
                     <Image src={"/img/users/" + user.image } width="215" height="215" quality="100" alt=""/>
                     
-                    <h3>{ user.name }</h3>
+                    <h3>{ user.name || "Nombre de usuario" }</h3>
                 </div>
                 
                 <div id={ styles.userInfo }>

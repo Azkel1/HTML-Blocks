@@ -67,7 +67,6 @@ h4, h5, h6 {
     height: 100%;
 }
 
-/* TODO: Animación para la pantalla de carga (mover a componente?)*/
 .loadingScreen {
     animation: loadingScreenAnimation 10s infinite alternate;
     background-color: var(--purple);
