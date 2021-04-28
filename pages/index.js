@@ -4,7 +4,7 @@ import Footer from "components/footer"
 
 export default function HomePage() {
     return (
-        <div>
+        <>
             <Head>
                 <title>Inicio - HTML Blocks</title>
             </Head>
@@ -16,6 +16,6 @@ export default function HomePage() {
             </main>
 
             <Footer />
-        </div>
+        </>
     )
 }

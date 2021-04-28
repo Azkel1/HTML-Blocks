@@ -1,4 +1,4 @@
-@import "styles/functions.scss";
+@use "styles/utils.scss";
 
 #sandboxMainContainer {
     display: grid;
@@ -8,14 +8,14 @@
 }
 
 #toolContainer {
-    background-color: shade(transparent, 10%);
+    background-color: utils.shade(transparent, 10%);
     border-radius: var(--border-radius);
 
     grid-area: tools;
 }
 
 #renderedContentContainer {
-    background-color: shade(transparent, 10%);
+    background-color: utils.shade(transparent, 10%);
     border-radius: var(--border-radius);
 
     grid-area: rendered-content;

@@ -13,27 +13,34 @@ export default function Header({ page }) {
 
     const headerButtons = function () {
         return (
-            <div id={styles.buttonContainer}>
+            <div id={ styles.buttonContainer }>
                 { page !== "sandbox" &&
                     <Link href="/sandbox">
-                        <a className={styles.headerButton}>Pruébalo!</a>
+                        <a className={ styles.headerButton }>Pruébalo!</a>
                     </Link>
                 }
                 { page !== "auth" && !user?.isLoggedIn &&
                     <Link href="/auth">
-                        <a className={styles.headerButtonWithIcon}>
+                        <a className={ styles.headerButtonWithIcon }>
                             Iniciar sesión
                                 <Icon icon="logIn" />
                         </a>
                     </Link>
                 }
                 { user?.isLoggedIn &&
+                    <Link href="/profile">
+                        <a className={ styles.headerButtonWithIcon }>
+                            <Icon icon="user" />
+                        </a>
+                    </Link>
+                }
+                { user?.isLoggedIn &&
                     <Link href="/api/logout">
-                        <a className={styles.headerButton} onClick={ async (e) => {
+                        <a className={ styles.headerButtonWithIcon } onClick={ async (e) => {
                             e.preventDefault();
                             await mutateUser(fetchJson("/api/logout"));
                             router.push("/auth");
-                        }}>Cerrar sesión</a>
+                        }}><Icon icon="logOut" /></a>
                     </Link>
                 }
             </div>

@@ -1,3 +1,6 @@
+@use "variables.scss";
+@use "utils.scss";
+
 @font-face {
     font-family: "Lovelo";
     src: url("../public/fonts/Lovelo\ Black.otf");
@@ -9,17 +12,21 @@
 }
 
 :root {
-    //Colores
-    --red: #ff5757;
-    --purple: #ea68ff;
-    --orange: #ff8148;
-    --yellow: #ffd957;
-    --green: #b3ff80;
-    --light-blue: #5ee2ff;
-    --blue: #5f7fff;
+    //Main properties
+    --primary: #{variables.$primary};
+    --secondary: #{variables.$secondary};
+
+    //Colors
+    --red: #{variables.$red};
+    --purple: #{variables.$purple};
+    --orange: #{variables.$orange};
+    --yellow: #{variables.$yellow};
+    --green: #{variables.$green};
+    --light-blue: #{variables.$light-blue};
+    --blue: #{variables.$blue};
 
     //Misc
-    --border-radius: 6px;
+    --border-radius: #{variables.$border-radius};
 }
 
 * {
@@ -45,13 +52,39 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
-#__next, #__next > div {
+h1, h2, h3 {
+    margin-bottom: 1em;
+}
+
+h4, h5, h6 {
+    margin-bottom: 0.5em;
+}
+
+#__next {
+    display: grid;
+    grid-template-rows: 125px 1fr auto;
+    
     height: 100%;
 }
 
-#__next > div {
-    display: grid;
-    grid-template-rows: 125px 1fr auto;
+/* TODO: Animación para la pantalla de carga (mover a componente?)*/
+.loadingScreen {
+    animation: loadingScreenAnimation 10s infinite alternate;
+    background-color: var(--purple);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    grid-row: 1 / span 2;
+}
+
+.errorMessage {
+    @include utils.messageBase("error");
+}
+
+.okMessage {
+    @include utils.messageBase("ok");
 }
 
 main {
@@ -60,4 +93,16 @@ main {
     background-repeat: no-repeat;
 
     margin: 2em;
+}
+
+/* --------------------------------------------- ANIMATIONS --------------------------------------------- */
+
+@keyframes loadingScreenAnimation {
+      0% { background-color: var(--purple); }
+     15% { background-color: var(--red); }
+     30% { background-color: var(--orange); }
+     45% { background-color: var(--yellow); }
+     60% { background-color: var(--green); }
+     75% { background-color: var(--blue); }
+    100% { background-color: var(--light-blue); }
 }

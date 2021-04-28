@@ -5,7 +5,7 @@ import styles from "styles/sandbox.module.scss"
 
 export default function SandboxPage () {
     return (
-        <div>
+        <>
             <Head>
                 <title>Sandbox - HTML Blocks</title>
             </Head>
@@ -17,6 +17,6 @@ export default function SandboxPage () {
                 <SandboxCanvas />
                 <div id={ styles.renderedContentContainer }></div> {/* TODO: Make separate component */}
             </main>
-        </div>
+        </>
     )
 }

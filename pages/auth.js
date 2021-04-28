@@ -5,7 +5,7 @@ import Header from "components/header"
 import AuthForm from "components/authForm"
 import fetchJson from "lib/fetchJson"
 
-import utilStyles from "styles/util.module.scss"
+import styles from "styles/auth.module.scss"
 
 export default function Login() {
 
@@ -69,16 +69,16 @@ export default function Login() {
     }
     
     return (
-        <div>
+        <>
             <Head>
                 <title>Inicio de sesión - HTML Blocks</title>
             </Head>
 
             <Header page="auth"/>
-            <main className={`${utilStyles.flexContainer} ${utilStyles.noMargin} ${utilStyles.hideOverflow}`}>
+            <main className={ styles.cardsContainer }>
                 <AuthForm message={message} onLoginSubmit={handleLoginSubmit} onRegisterSubmit={handleRegisterSubmit}/>
             </main>
-        </div>
+        </>
     )
 }
 

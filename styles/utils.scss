@@ -1,0 +1,49 @@
+@use "sass:color";
+@use "variables.scss";
+
+/* ------------------------------- FUNCTIONS ------------------------------- */
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+
+/* ------------------------------- MIXINS ------------------------------- */
+@mixin buttonBase($color, $backgroundColor, $borderColor: false) {
+    background-color: $backgroundColor;
+    
+    @if $borderColor {
+        border: 2px solid $borderColor;
+    } 
+    @else {
+        border: 0;
+    }
+
+    border-radius: var(--border-radius);
+    color: $color;
+    outline: 0;
+
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.5s;
+
+    display: inline-block;
+    padding: 0.7em 1em;
+
+    &:hover {
+        background-color: shade($backgroundColor, 50%);
+    }
+}
+
+@mixin messageBase($type) {
+    $color: transparent;
+
+    @if ($type == "error") { $color: variables.$red}
+    @else if ($type == "ok") { $color: variables.$green }
+
+    border: 2px solid $color;
+    border-radius: var(--border-radius);
+    background-color: color.scale($color, $alpha: -20%);
+
+    text-align: center;
+    margin-top: 0;
+    padding: 0.5em 0;
+}

@@ -1,7 +1,12 @@
-@import "styles/functions.scss";
+@use "/styles/utils.scss";
 
 .footer {
-    background-color: shade(transparent, 5%);
-    height: 125px;
+    background-color: utils.shade(transparent, 5%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 75px;
     padding: 1em 1.5em;
 }

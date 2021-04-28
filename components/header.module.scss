@@ -1,4 +1,5 @@
-@import "../styles/functions.scss";
+@use "/styles/utils.scss";
+@use "/styles/variables.scss";
 
 .header {
     display: flex;
@@ -35,27 +36,21 @@
         }
 
         a:hover {
-            background-color: shade(transparent, 10%);
+            background-color: utils.shade(transparent, 10%);
             border-bottom: 2px solid white;
             border-width: 3px;
         }
     }
 
     #buttonContainer {
+        display: flex;
+
         margin-left: auto;
 
         .headerButton {
-            background-color: var(--yellow);
-            border: 2px solid white;
-            color: black;
-            display: inline-block;
-    
-            font-weight: bold;
+            @include utils.buttonBase(black, variables.$primary, white);
+
             margin-left: 1em;
-    
-            &:hover {
-                background-color: shade(#ffd957, 50%); /*FIXME: Comprobar como pasarle el color actual o hacer uso de variables de CSS*/
-            }
         }
     
         .headerButtonWithIcon {
@@ -68,7 +63,7 @@
             margin-left: 1em;
     
             &:hover {
-                background-color: shade(transparent, 20%);
+                background-color: utils.shade(transparent, 20%);
             }
         }
     }

@@ -1,7 +1,7 @@
-@import "styles/functions.scss";
+@use "/styles/utils.scss";
 
 #canvasContainer {
-    background-color: shade(transparent, 10%);
+    background-color: utils.shade(transparent, 10%);
     border-radius: var(--border-radius);
     grid-area: canvas;
 

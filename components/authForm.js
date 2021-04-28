@@ -1,7 +1,6 @@
 import React from "react"
 
 import styles from "components/authForm.module.scss"
-import utilStyles from "styles/util.module.scss"
 
 export default function AuthForm({ message, onLoginSubmit, onRegisterSubmit }) {
     const login = React.createRef();
@@ -26,9 +25,9 @@ export default function AuthForm({ message, onLoginSubmit, onRegisterSubmit }) {
                 <label htmlFor="loginPassword">Contraseña: </label>
                 <input id="loginPassword" type="password" autoComplete="password" required />
 
-                {message && <p className={ (message.type === "err") ? utilStyles.errorMessage : utilStyles.okMessage}>{message.text}</p>}
+                {message && <p className={ (message.type === "err") ? "errorMessage" : "okMessage"}>{message.text}</p>}
 
-                <button className={`${utilStyles.button} ${styles.formSubmitButton}`} type="submit">Iniciar sesión</button>
+                <button className={ styles.formSubmitButton } type="submit">Iniciar sesión</button>
                 <button id={styles.formSwitchToRegister} className={styles.formSwitchButton} type="button" onClick={switchAuth}>¿No tienes una cuenta? Regístrate</button>
             </form>
             
@@ -44,9 +43,9 @@ export default function AuthForm({ message, onLoginSubmit, onRegisterSubmit }) {
                 <label htmlFor="registerPasswordConfirm">Confirmar contraseña: </label>
                 <input id="registerPasswordConfirm" type="password" autoComplete="new-password" required />
 
-                {message && <p className={ (message.type === "err") ? utilStyles.errorMessage : utilStyles.okMessage}>{message.text}</p>}
+                {message && <p className={ (message.type === "err") ? "errorMessage" : "okMessage"}>{message.text}</p>}
 
-                <button className={`${utilStyles.button} ${styles.formSubmitButton}`} type="submit">Registrarse</button>
+                <button className={ styles.formSubmitButton } type="submit">Registrarse</button>
             </form>
         </div>
     )
