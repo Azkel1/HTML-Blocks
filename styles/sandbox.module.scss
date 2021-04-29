@@ -21,7 +21,9 @@
     grid-area: rendered-content;
 }
 
-@media (max-width: 900px) {
+/* -------------------------------------------- MEDIA QUERIES -------------------------------------------- */
+
+@media only screen and (max-width: 900px) {
     #sandboxMainContainer {
         grid-template-columns: auto;
         grid-template-rows: 100px 1fr 1fr;

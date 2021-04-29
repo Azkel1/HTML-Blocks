@@ -10,13 +10,13 @@ export default withSession(async (req, res) => {
         const data = await db.oneOrNone("SELECT (email, name, image, register_date, passhash) FROM users WHERE email = $1", email);
 
         if (data) {
-            const [userEmail, userName, userImage, userRegisterDate, userPasshash] = data.row.replace(/\(|\)/g, "").split(",");
+            const [userEmail, userName, userImage, userRegisterDate, userPasshash] = data.row.replace(/\(|\)|\"/g, "").split(",");
             const doPassMatch = await bcrypt.compare(password, userPasshash);
             let response = {};
 
             if (doPassMatch) {
                 const user = {
-                    name: userName.replace(/\"/g, ""),
+                    name: userName,
                     email: userEmail,
                     image: userImage,
                     registerDate: userRegisterDate,

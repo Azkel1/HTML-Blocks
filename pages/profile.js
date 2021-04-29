@@ -25,7 +25,7 @@ export default function Profile() {
                 <h1 id={ styles.welcomeMessage }>Bienvenido a tu perfil!</h1>
                 
                 <div id={ styles.userCard }>    {/* Implement ability to change user name and image */}
-                    <Image src={"/img/users/" + user.image } width="215" height="215" quality="100" alt=""/>
+                    <Image src={"/img/users/" + user.image } layout="responsive" width="215" height="215" quality="100" alt=""/>
                     
                     <h3>{ user.name || "Nombre de usuario" }</h3>
                 </div>

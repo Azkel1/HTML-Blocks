@@ -105,3 +105,18 @@ main {
      75% { background-color: var(--blue); }
     100% { background-color: var(--light-blue); }
 }
+
+/* -------------------------------------------- MEDIA QUERIES -------------------------------------------- */
+
+@media only screen and(max-width: 600px) {
+    #__next {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        
+        height: 100%;
+    }
+
+    main {
+        background-size: contain;
+    }
+}

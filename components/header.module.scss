@@ -68,3 +68,28 @@
         }
     }
 }
+
+/* -------------------------------------------- MEDIA QUERIES -------------------------------------------- */
+
+@media only screen and (max-width: 600px) {
+    .header {
+        background-image: none;
+
+        flex-direction: column;
+
+        nav {
+            ul {
+                padding-left: 0;
+            }
+        }
+
+        #buttonContainer {
+            margin: 1em auto 0 auto;
+            column-gap: 1em;
+
+            .headerButton, .headerButtonWithIcon {
+                margin: 0;
+            }
+        }
+    }
+}
