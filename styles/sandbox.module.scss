@@ -5,21 +5,48 @@
     gap: 2em;
     grid-template-columns: 100px 1fr 1fr;
     grid-template-areas: "tools canvas rendered-content";
+
+    div:nth-of-type(1) {
+        background-color: utils.shade(transparent, 10%);
+        border-radius: var(--border-radius);
+
+        grid-area: tools;
+
+        padding: 1em;
+    }
+
+    #renderedContentContainer {
+        background-color: utils.shade(transparent, 10%);
+        border-radius: var(--border-radius);
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        grid-area: rendered-content;
+
+        padding: 1em;
+
+        img {
+            width: 40%;
+        }
+
+        * {
+            border-radius: var(--border-radius);
+
+            padding: 0.5em;
+            margin: 0;
+            min-width: 20px;
+            min-height: 20px;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+    }
 }
 
-#toolContainer {
-    background-color: utils.shade(transparent, 10%);
-    border-radius: var(--border-radius);
-
-    grid-area: tools;
-}
-
-#renderedContentContainer {
-    background-color: utils.shade(transparent, 10%);
-    border-radius: var(--border-radius);
-
-    grid-area: rendered-content;
-}
 
 /* -------------------------------------------- MEDIA QUERIES -------------------------------------------- */
 

@@ -1,0 +1,27 @@
+@use "styles/utils.scss";
+
+#mainContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    button {
+        background-color: utils.shade(transparent, 10%);
+        border: 0;
+        border-radius: var(--border-radius);
+
+        min-height: 50px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+/* -------------------------------------------- MEDIA QUERIES -------------------------------------------- */
+
+@media only screen and (max-width: 900px) {
+    #mainContainer {
+        flex-direction: row;
+    }
+}
