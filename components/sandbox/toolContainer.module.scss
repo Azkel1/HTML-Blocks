@@ -21,7 +21,11 @@
 /* -------------------------------------------- MEDIA QUERIES -------------------------------------------- */
 
 @media only screen and (max-width: 900px) {
-    #mainContainer {
+    .mainContainer {
         flex-direction: row;
+
+        button {
+            min-width: 70px;
+        }
     }
 }
