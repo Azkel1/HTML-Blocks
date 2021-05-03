@@ -19,6 +19,7 @@
 
     border-radius: var(--border-radius);
     color: $color;
+    letter-spacing: 0.04em;
     outline: 0;
 
     cursor: pointer;
@@ -38,7 +39,7 @@
 @mixin messageBase($type) {
     $color: transparent;
 
-    @if ($type == "error") { $color: variables.$red}
+    @if ($type == "error") { $color: variables.$red }
     @else if ($type == "ok") { $color: variables.$green }
 
     border: 2px solid $color;

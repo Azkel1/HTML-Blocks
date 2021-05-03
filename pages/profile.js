@@ -1,6 +1,5 @@
 import Head from "next/head"
-import Header from "components/header"
-import Footer from "components/footer"
+import { Header, Footer } from "components"
 import useUser from "lib/useUser"
 import { parseDate } from "lib/util"
 import Image from "next/image"

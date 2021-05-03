@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import useUser from 'lib/useUser'
-import Head from "next/head"
-import Header from "components/header"
-import AuthForm from "components/authForm"
-import fetchJson from "lib/fetchJson"
+import { useState } from 'react';
+import useUser from 'lib/useUser';
+import Head from "next/head";
+import { Header, AuthForm } from "components";
+import fetchJson from "lib/fetchJson";
 
-import styles from "styles/auth.module.scss"
+import styles from "styles/auth.module.scss";
 
 export default function Login() {
 

@@ -2,11 +2,22 @@
 
 #sandboxMainContainer {
     display: grid;
-    gap: 2em;
+    gap: 1em 2em;
+    grid-template-rows: 50px auto;
     grid-template-columns: 100px 1fr 1fr;
-    grid-template-areas: "tools canvas rendered-content";
+    grid-template-areas: "actionbar actionbar actionbar"
+                         "tools canvas rendered-content";
 
-    div:nth-of-type(1) {
+    #actionBar {
+        background-color: utils.shade(transparent, 10%);
+        border-radius: var(--border-radius);
+
+        grid-area: actionbar;
+
+        padding: 0.6em;
+    }
+
+    #toolContainer {
         background-color: utils.shade(transparent, 10%);
         border-radius: var(--border-radius);
 

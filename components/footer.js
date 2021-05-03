@@ -1,6 +1,6 @@
-import Image from "next/image"
+import Image from "next/image";
 
-import styles from "components/footer.module.scss"
+import styles from "./footer.module.scss";
 
 export default function Footer () {
     return (

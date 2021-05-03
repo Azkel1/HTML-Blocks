@@ -1,0 +1,13 @@
+@use "/styles/utils.scss";
+@use "/styles/variables.scss";
+
+.mainContainer {
+    display: flex;
+    gap: 1em;
+
+    button {
+        @include utils.buttonBase(black, variables.$secondary);
+        
+        font-weight: normal;
+    }
+}

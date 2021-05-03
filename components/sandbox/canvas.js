@@ -1,8 +1,8 @@
-import { Canvas, Rect } from "lib/fabric.custom"
-import { EventEmitter } from "lib/events"
-import React from "react"
+import { Canvas, Rect } from "lib/fabric.custom";
+import { EventEmitter } from "lib/events";
+import React from "react";
 
-import styles from "components/canvas.module.scss"
+import styles from "./canvas.module.scss";
 
 export default class SandboxCanvas extends React.Component {
     canvas = null;
@@ -20,6 +20,7 @@ export default class SandboxCanvas extends React.Component {
             height: this.canvasContainer.current.clientHeight,
             selection: false
         });
+        this.canvas.includeDefaultValues = false;
 
         window.addEventListener("resize", () => {
             // Set height & width to 0 so the parent div can resize
@@ -44,6 +45,10 @@ export default class SandboxCanvas extends React.Component {
         this.canvas.add(new Rect(300, undefined, "img"));
         this.canvas.add(new Rect(500, undefined, "h1")); */
         /* ----------------------------------------- */
+    }
+
+    get canvas() {
+        return this.canvas;
     }
 
     render() {

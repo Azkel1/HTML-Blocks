@@ -1,8 +1,7 @@
 import React from "react"
 import Head from "next/head"
 import Header from "components/header"
-import SandboxCanvas from "components/canvas"
-import ToolContainer from "components/toolContainer"
+import { SandboxCanvas, ToolContainer, ActionBar } from "components/sandbox"
 import { EventEmitter } from "lib/events"
 import { HTML_ELEMENTS } from "lib/constants"
 
@@ -63,6 +62,7 @@ export default function SandboxPage () {
             <Header page="sandbox"/>
 
             <main id={ styles.sandboxMainContainer }>
+                <ActionBar sandboxCanvasRef={ sandboxCanvas }/>
                 <ToolContainer ref={ toolContainer }/> {/* TODO: Make separate component */}
                 <SandboxCanvas ref={ sandboxCanvas }/>
                 <div id={ styles.renderedContentContainer } ref={ contentContainer }></div> {/* TODO: Make separate component */}

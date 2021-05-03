@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 
-import styles from "components/authForm.module.scss"
+import styles from "./authForm.module.scss";
 
 export default function AuthForm({ message, onLoginSubmit, onRegisterSubmit }) {
     const login = React.createRef();

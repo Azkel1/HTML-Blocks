@@ -1,11 +1,11 @@
-import useUser from 'lib/useUser'
-import fetchJson from 'lib/fetchJson'
+import useUser from "lib/useUser";
+import fetchJson from "lib/fetchJson";
+import { Icon } from "components";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from 'next/router';
 
-import Icon from "components/icons"
-import styles from "components/header.module.scss"
-import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from 'next/router'
+import styles from "./header.module.scss";
 
 export default function Header({ page }) {
     const { user, mutateUser } = useUser();
