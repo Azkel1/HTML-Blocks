@@ -1,11 +1,11 @@
-import withSession from 'lib/session'
+import withSession from "lib/session";
 
-const db = require("lib/db").instance;
+const db     = require("lib/db").instance;
 const bcrypt = require("bcrypt");
 
 export default withSession(async (req, res) => {
     return new Promise(async (resolve) => {
-        const { email, password } = await req.body
+        const { email, password } = await req.body;
 
         const data = await db.oneOrNone("SELECT (email, name, image, register_date, passhash) FROM users WHERE email = $1", email);
 
@@ -23,7 +23,7 @@ export default withSession(async (req, res) => {
                     isLoggedIn: true 
                 };
 
-                req.session.set('user', user);
+                req.session.set("user", user);
                 await req.session.save()
 
                 response = {

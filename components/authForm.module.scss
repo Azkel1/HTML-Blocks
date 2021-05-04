@@ -33,6 +33,7 @@
     .formSubmitButton {
         @include utils.buttonBase(black, variables.$primary);
 
+        margin-top: 1em;
         padding: 1em;
     }
 

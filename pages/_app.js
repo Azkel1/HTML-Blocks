@@ -1,8 +1,8 @@
-import { SWRConfig } from 'swr'
-import fetch from 'lib/fetchJson'
+import { SWRConfig } from "swr"
+import fetch from "lib/fetchJson"
+import Head from "next/head"
 
-import 'styles/base.scss'
-import Head from 'next/head'
+import "styles/base.scss"
 
 export default function App({ Component, pageProps }) {
 

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import useUser from 'lib/useUser';
+import { useState } from "react";
+import useUser from "lib/useUser";
 import Head from "next/head";
 import { Header, AuthForm } from "components";
 import fetchJson from "lib/fetchJson";
@@ -9,11 +9,11 @@ import styles from "styles/auth.module.scss";
 export default function Login() {
 
     const { mutateUser } = useUser({
-        redirectTo: '/profile',
+        redirectTo: "/profile",
         redirectIfFound: true,
     })
 
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState("");
 
     async function handleLoginSubmit(e) {
         e.preventDefault()
@@ -26,16 +26,16 @@ export default function Login() {
         try {
             let response = {};
             await mutateUser( 
-                response = await fetchJson('/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                response = await fetchJson("/api/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(body),
                 })
             )
             
             if (!response.ok) setMessage({type: "err", text: response.body.text})
         } catch (error) {
-            console.error('Error inesperado:', error)
+            console.error("Error inesperado:", error)
             setMessage({type: "err", text: error.data?.message})
         }
     }
@@ -50,9 +50,9 @@ export default function Login() {
             }
     
             try {
-                const response = await fetchJson('/api/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                const response = await fetchJson("/api/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(body)
                 });
 
