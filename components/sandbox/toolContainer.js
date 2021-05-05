@@ -7,14 +7,13 @@ import parentStyles from "styles/sandbox.module.scss";
 
 export default class ToolContainer extends React.Component {
 
-    emButtons = [];
 
     constructor() {
         super();
+        this.emButtons = [];
+
         for (let [key, value] of Object.entries(HTML_ELEMENTS)) {
-            this.emButtons.push(
-                <button type="button" key={ key } style={{ backgroundColor: value.color}} onClick={ () => EventEmitter.dispatch
-                ("createCanvasItem", key) }></button>
+            this.emButtons.push(<button type="button" key={ key } style={{ backgroundColor: value.color}} onClick={ () => EventEmitter.dispatch("createCanvasItem", key) }></button>
             );
         }
     }
@@ -24,6 +23,6 @@ export default class ToolContainer extends React.Component {
             <div id={ parentStyles.toolContainer } className={ styles.mainContainer}>
                 { this.emButtons }
             </div>
-        )
+        );
     } 
 }

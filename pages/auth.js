@@ -11,17 +11,17 @@ export default function Login() {
     const { mutateUser } = useUser({
         redirectTo: "/profile",
         redirectIfFound: true,
-    })
+    });
 
     const [message, setMessage] = useState("");
 
     async function handleLoginSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
 
         const body = {
             email: e.target.loginEmail.value.trim(),
             password: e.target.loginPassword.value.trim()
-        }
+        };
 
         try {
             let response = {};
@@ -31,12 +31,12 @@ export default function Login() {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(body),
                 })
-            )
+            );
             
-            if (!response.ok) setMessage({type: "err", text: response.body.text})
+            if (!response.ok) setMessage({type: "err", text: response.body.text});
         } catch (error) {
-            console.error("Error inesperado:", error)
-            setMessage({type: "err", text: error.data?.message})
+            console.error("Error inesperado:", error);
+            setMessage({type: "err", text: error.data?.message});
         }
     }
 
@@ -47,7 +47,7 @@ export default function Login() {
             const body = {
                 email: e.target.registerEmail.value.trim(),
                 password: e.target.registerPassword.value.trim()
-            }
+            };
     
             try {
                 const response = await fetchJson("/api/register", {
@@ -57,7 +57,7 @@ export default function Login() {
                 });
 
                 if (response.ok) setMessage({type: "ok", text: response.body.text});
-                else setMessage({type: "err", text: response.body.text})
+                else setMessage({type: "err", text: response.body.text});
 
             } catch (error) {
                 console.error(error);
@@ -78,6 +78,6 @@ export default function Login() {
                 <AuthForm message={message} onLoginSubmit={handleLoginSubmit} onRegisterSubmit={handleRegisterSubmit}/>
             </main>
         </>
-    )
+    );
 }
 

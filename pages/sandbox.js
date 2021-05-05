@@ -1,11 +1,11 @@
-import React from "react"
-import Head from "next/head"
-import Header from "components/header"
-import { SandboxCanvas, ToolContainer, ActionBar } from "components/sandbox"
-import { EventEmitter } from "lib/events"
-import { HTML_ELEMENTS } from "lib/constants"
+import React from "react";
+import Head from "next/head";
+import Header from "components/header";
+import { SandboxCanvas, ToolContainer, ActionBar } from "components/sandbox";
+import { EventEmitter } from "lib/events";
+import { HTML_ELEMENTS } from "lib/constants";
 
-import styles from "styles/sandbox.module.scss"
+import styles from "styles/sandbox.module.scss";
 
 export default function SandboxPage () {
     const toolContainer = React.createRef();
@@ -68,5 +68,5 @@ export default function SandboxPage () {
                 <div id={ styles.renderedContentContainer } ref={ contentContainer }></div> {/* TODO: Make separate component */}
             </main>
         </>
-    )
+    );
 }

@@ -7,7 +7,7 @@ import styles from "./actionBar.module.scss";
 
 export default function ActionBar({ sandboxCanvasRef }) {
     const {isVisible: isSaveVisible, toggleModal: toggleSaveModal} = useModal();
-    const {isVisible: isLoadVisible, toggleModal: toggleLoadModal} = useModal();
+    //const {isVisible: isLoadVisible, toggleModal: toggleLoadModal} = useModal();
     const [message, setMessage] = useState("");
 
     const saveDesign = async function(e) {
@@ -41,9 +41,17 @@ export default function ActionBar({ sandboxCanvasRef }) {
         }
     };
 
-    const loadDesign = function(json) {
-        canvas.loadFromJSON(json);
-    }
+    /* const loadDesign = async function(json) {
+        
+        const response = await fetchJson("/api/designs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: designName,
+                data: canvas.toJSON(includedProperties)
+            })
+        });
+    }; */
 
     return(
         <div id={ parentStyles.actionBar } className={ styles.mainContainer } >
@@ -63,5 +71,5 @@ export default function ActionBar({ sandboxCanvasRef }) {
                 </form>
             </Modal>
         </div>
-    )
+    );
 }

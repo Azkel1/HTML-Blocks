@@ -1,17 +1,15 @@
-import { Canvas, Rect } from "lib/fabric.custom";
+import { Canvas } from "lib/fabric.custom";
 import { EventEmitter } from "lib/events";
 import React from "react";
 
 import styles from "./canvas.module.scss";
 
 export default class SandboxCanvas extends React.Component {
-    canvas = null;
-    newTop = 0;
-    edgeDetection = 40;
-
     constructor() {
         super();
         this.canvasContainer = React.createRef(); //Create reference to canvasContainer DOM node.
+        this.newTop = 0;
+        this.edgeDetection = 40;
     }
 
     componentDidMount() { //Wait for DOM to load
@@ -47,15 +45,11 @@ export default class SandboxCanvas extends React.Component {
         /* ----------------------------------------- */
     }
 
-    get canvas() {
-        return this.canvas;
-    }
-
     render() {
         return (
             <div id={styles.canvasContainer} ref={this.canvasContainer}>
                 <canvas id="main-canvas"></canvas>
             </div>
-        )
+        );
     }
 }

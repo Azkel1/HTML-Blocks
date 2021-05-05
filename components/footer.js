@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import styles from "./footer.module.scss";
 
 export default function Footer () {
@@ -8,5 +6,5 @@ export default function Footer () {
             {/* <Image src="/svg/HTMLBlocks_logo_min.svg" width="300" height="50" alt="" /> */}
             <p>2021. HTML Blocks.</p>
         </footer>
-    )
+    );
 }

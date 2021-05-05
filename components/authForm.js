@@ -48,5 +48,5 @@ export default function AuthForm({ message, onLoginSubmit, onRegisterSubmit }) {
                 <button className={ styles.formSubmitButton } type="submit">Registrarse</button>
             </form>
         </div>
-    )
+    );
 }

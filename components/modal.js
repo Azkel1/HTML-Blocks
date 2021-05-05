@@ -13,8 +13,8 @@ export const useModal = () => {
     return {
         isVisible,
         toggleModal,
-    }
-}
+    };
+};
 
 export function Modal({ isVisible, hideModal, children, title }) {
     return isVisible ? createPortal(
@@ -29,5 +29,5 @@ export function Modal({ isVisible, hideModal, children, title }) {
                 </div>
             </div>
         </div>
-    , document.body) : null;
+        , document.body) : null;
 }

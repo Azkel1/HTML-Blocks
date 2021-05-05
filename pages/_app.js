@@ -1,8 +1,8 @@
-import { SWRConfig } from "swr"
-import fetch from "lib/fetchJson"
-import Head from "next/head"
+import { SWRConfig } from "swr";
+import fetch from "lib/fetchJson";
+import Head from "next/head";
 
-import "styles/base.scss"
+import "styles/base.scss";
 
 export default function App({ Component, pageProps }) {
 
@@ -15,12 +15,12 @@ export default function App({ Component, pageProps }) {
                 value={{
                     fetcher: fetch,
                     onError: (err) => {
-                        console.error(err)
+                        console.error(err);
                     },
                 }}
             >
                 <Component {...pageProps} />
             </SWRConfig>
         </>
-    )
+    );
 }

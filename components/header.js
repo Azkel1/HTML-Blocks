@@ -23,7 +23,7 @@ export default function Header({ page }) {
                     <Link href="/auth">
                         <a className={ styles.headerButtonWithIcon }>
                             Iniciar sesión
-                                <Icon icon="logIn" />
+                            <Icon icon="logIn" />
                         </a>
                     </Link>
                 }
@@ -44,8 +44,8 @@ export default function Header({ page }) {
                     </Link>
                 }
             </div>
-        )
-    }
+        );
+    };
 
     return (
         <header className={styles.header}>
@@ -72,5 +72,5 @@ export default function Header({ page }) {
             </nav>
             { headerButtons()}
         </header>
-    )
+    );
 }
