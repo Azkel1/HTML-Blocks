@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { Header, Footer } from "components";
 import useUser from "lib/useUser";
 import { parseDate } from "lib/util";
@@ -21,7 +22,9 @@ export default function Profile() {
             userDesigns.push(<div key={ design.name + design.creationDate } className={ styles.containerContentRow }>
                 <b>{ design.name }</b>
                 <em>{ parseDate(design.creationDate) }</em>
-                <button type="button">Editar</button>
+                <Link href={ `/sandbox?design=${design.name}` }>
+                    <a>Editar</a>
+                </Link>
             </div>);
         });
     }
@@ -37,7 +40,7 @@ export default function Profile() {
                 <h1 id={ styles.welcomeMessage }>Bienvenido a tu perfil!</h1>
 
                 <div id={ styles.userCard }>    {/* Implement ability to change user name and image */}
-                    <Image src={"/img/users/" + user.image} layout="responsive" width="215" height="215" quality="100" alt="" />
+                    <Image src={ "/img/users/" + user.image } layout="responsive" width="215" height="215" quality="100" alt="" />
 
                     <h3>{ user.name || "Nombre de usuario" }</h3>
                 </div>

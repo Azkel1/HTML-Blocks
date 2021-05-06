@@ -13,14 +13,14 @@ export default class ToolContainer extends React.Component {
         this.emButtons = [];
 
         for (let [key, value] of Object.entries(HTML_ELEMENTS)) {
-            this.emButtons.push(<button type="button" key={ key } style={{ backgroundColor: value.color}} onClick={ () => EventEmitter.dispatch("createCanvasItem", key) }></button>
+            this.emButtons.push(<button type="button" key={ key } style={ {backgroundColor: value.color} } onClick={ () => EventEmitter.dispatch("createCanvasItem", {emType: key}) }></button>
             );
         }
     }
 
     render() {
         return (
-            <div id={ parentStyles.toolContainer } className={ styles.mainContainer}>
+            <div id={ parentStyles.toolContainer } className={ styles.mainContainer }>
                 { this.emButtons }
             </div>
         );

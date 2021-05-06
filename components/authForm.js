@@ -18,21 +18,21 @@ export default function AuthForm({ message, onLoginSubmit, onRegisterSubmit }) {
 
     return (
         <div>
-            <form id={styles.loginForm} className={`${styles.form}`} onSubmit={onLoginSubmit} ref={login}>
+            <form id={ styles.loginForm } className={ `${styles.form}` } onSubmit={ onLoginSubmit } ref={ login }>
                 <label htmlFor="loginEmail">Email: </label>
                 <input id="loginEmail" type="email" autoComplete="email" required />
 
                 <label htmlFor="loginPassword">Contraseña: </label>
                 <input id="loginPassword" type="password" autoComplete="password" required />
 
-                {message && <p className={ (message.type === "err") ? "errorMessage" : "okMessage"}>{message.text}</p>}
+                {message && <p className={ (message.type === "err") ? "errorMessage" : "okMessage" }>{message.text}</p>}
 
                 <button className={ styles.formSubmitButton } type="submit">Iniciar sesión</button>
-                <button id={styles.formSwitchToRegister} className={styles.formSwitchButton} type="button" onClick={switchAuth}>¿No tienes una cuenta? Regístrate</button>
+                <button id={ styles.formSwitchToRegister } className={ styles.formSwitchButton } type="button" onClick={ switchAuth }>¿No tienes una cuenta? Regístrate</button>
             </form>
             
-            <form id={styles.registerForm} className={`${styles.form} ${styles.hidden}`} onSubmit={onRegisterSubmit} ref={register}>
-                <button id={styles.formSwitchToLogin} className={styles.formSwitchButton} type="button" onClick={switchAuth}>¿Ya tienes una cuenta? Inicia sesión</button>
+            <form id={ styles.registerForm } className={ `${styles.form} ${styles.hidden}` } onSubmit={ onRegisterSubmit } ref={ register }>
+                <button id={ styles.formSwitchToLogin } className={ styles.formSwitchButton } type="button" onClick={ switchAuth }>¿Ya tienes una cuenta? Inicia sesión</button>
                 
                 <label htmlFor="registerEmail">Email: </label>
                 <input id="registerEmail" type="email" autoComplete="email" required />
@@ -43,7 +43,7 @@ export default function AuthForm({ message, onLoginSubmit, onRegisterSubmit }) {
                 <label htmlFor="registerPasswordConfirm">Confirmar contraseña: </label>
                 <input id="registerPasswordConfirm" type="password" autoComplete="new-password" required />
 
-                {message && <p className={ (message.type === "err") ? "errorMessage" : "okMessage"}>{message.text}</p>}
+                {message && <p className={ (message.type === "err") ? "errorMessage" : "okMessage" }>{message.text}</p>}
 
                 <button className={ styles.formSubmitButton } type="submit">Registrarse</button>
             </form>

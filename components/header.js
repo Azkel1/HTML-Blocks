@@ -40,7 +40,7 @@ export default function Header({ page }) {
                             e.preventDefault();
                             await mutateUser(fetchJson("/api/logout"));
                             router.push("/auth");
-                        }}><Icon icon="logOut" /></a>
+                        } }><Icon icon="logOut" /></a>
                     </Link>
                 }
             </div>
@@ -48,7 +48,7 @@ export default function Header({ page }) {
     };
 
     return (
-        <header className={styles.header}>
+        <header className={ styles.header }>
             <Link href="/">
                 <a>
                     <Image src="/svg/HTMLBlocks_logo_min.svg" width="300" height="50" alt="" />

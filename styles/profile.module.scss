@@ -41,8 +41,11 @@
 
             padding: 1.2em;
 
-            button {
+            a {
                 @include utils.buttonBase(white, #5f7fff, white);
+                
+                text-decoration: none;
+                padding: 0.3em 1em;
             }
         }
 

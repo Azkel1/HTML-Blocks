@@ -26,6 +26,7 @@
     "rules": {
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
+        "react/jsx-curly-spacing": [2, "always"],
         "indent": [
             "error",
             4

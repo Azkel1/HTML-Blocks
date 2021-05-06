@@ -75,7 +75,7 @@ export default function Login() {
 
             <Header page="auth"/>
             <main className={ styles.cardsContainer }>
-                <AuthForm message={message} onLoginSubmit={handleLoginSubmit} onRegisterSubmit={handleRegisterSubmit}/>
+                <AuthForm message={ message } onLoginSubmit={ handleLoginSubmit } onRegisterSubmit={ handleRegisterSubmit }/>
             </main>
         </>
     );

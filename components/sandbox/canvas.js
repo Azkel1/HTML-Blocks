@@ -12,7 +12,7 @@ export default class SandboxCanvas extends React.Component {
         this.edgeDetection = 40;
     }
 
-    componentDidMount() { //Wait for DOM to load
+    componentDidMount() {
         this.canvas = new Canvas("main-canvas", {
             width: this.canvasContainer.current.clientWidth,
             height: this.canvasContainer.current.clientHeight,
@@ -20,6 +20,33 @@ export default class SandboxCanvas extends React.Component {
         });
         this.canvas.includeDefaultValues = false;
 
+        EventEmitter.subscribe("createCanvasItem", (data) => {
+            this.canvas.addBlock(data);
+        });
+
+        // TODO: If currently the canvas is not empty, ask the user before erasing all of his progress.
+        EventEmitter.subscribe("loadSavedDesign", (data) => {
+            if (data.objects) {
+                this.canvas.clear();
+
+                data.objects.forEach(o => {
+                    this.canvas.addBlock(o);
+                });
+
+                this.canvas.renderAll();
+                this.canvas.calcOffset();
+                EventEmitter.dispatch("renderHTML", this.canvas);
+            }
+        });
+
+        // * Testing purposes only
+        /* this.canvas.addBlock({ top: 0, emType: "div", width: 400, height: 200 });
+        this.canvas.addBlock({ top: 300, emType: "img" });
+        this.canvas.addBlock({ top: 500, emType: "h1" }); */
+        /* ----------------------------------------- */
+    }
+
+    componentDidUpdate() {
         window.addEventListener("resize", () => {
             // Set height & width to 0 so the parent div can resize
             document.querySelector(".canvas-container").style.width = 0;
@@ -33,21 +60,11 @@ export default class SandboxCanvas extends React.Component {
                 console.error(e);
             }
         });
-
-        EventEmitter.subscribe("createCanvasItem", (itemType, top, left) => {
-            this.canvas.addCanvasBlock(itemType, top, left);
-        });
-
-        // * Testing purposes only
-        /* this.canvas.add(new Rect(0, undefined, "div", 400, 200));
-        this.canvas.add(new Rect(300, undefined, "img"));
-        this.canvas.add(new Rect(500, undefined, "h1")); */
-        /* ----------------------------------------- */
     }
 
     render() {
         return (
-            <div id={styles.canvasContainer} ref={this.canvasContainer}>
+            <div id={ styles.canvasContainer } ref={ this.canvasContainer }>
                 <canvas id="main-canvas"></canvas>
             </div>
         );
