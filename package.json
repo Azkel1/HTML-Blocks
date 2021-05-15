@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "canvas": "^2.7.0",
     "fabric": "^4.4.0",
     "next": "^10.0.9",
     "next-iron-session": "^4.1.12",
