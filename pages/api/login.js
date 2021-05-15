@@ -1,7 +1,7 @@
 import withSession from "lib/session";
 
 const db     = require("lib/db").instance;
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 export default withSession(async (req, res) => {
     const { email, password } = await req.body;

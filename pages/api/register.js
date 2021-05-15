@@ -1,5 +1,5 @@
 const db = require("lib/db").instance;
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 export default async function createUser(req, res) {
     return new Promise(() => {
