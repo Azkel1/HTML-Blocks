@@ -4,7 +4,7 @@
 #profile {
     display: grid;
     grid-template-columns: 250px 1fr;
-    grid-template-rows: auto 2fr 4fr;
+    grid-template-rows: auto auto 4fr;
     grid-template-areas: "welcome welcome"
                          "card info"
                          "designs designs";
