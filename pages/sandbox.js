@@ -3,7 +3,7 @@ import Head from "next/head";
 import Header from "components/header";
 import { SandboxCanvas, ToolContainer, ActionBar } from "components/sandbox";
 import { EventEmitter } from "lib/events";
-import { HTML_ELEMENTS } from "lib/constants";
+import constants from "lib/constants";
 import fetchJson from "lib/fetchJson";
 
 import styles from "styles/sandbox.module.scss";
@@ -27,6 +27,9 @@ export default class SandboxPage extends React.Component {
             });
         }
 
+        // Check the browser's local storage for a saved design, if found load it.
+        const tempDesign = window.localStorage.getItem("tempDesign");
+        if (tempDesign) EventEmitter.dispatch("loadSavedDesign", JSON.parse(tempDesign));
 
         // When the "renderHTML" event is fired, get all the elements from the canvas and create the corresponding HTML structure.
         EventEmitter.subscribe("renderHTML", (canvas) => {
@@ -48,10 +51,10 @@ export default class SandboxPage extends React.Component {
                     const label = document.createElement("span");
 
                     em.id = obj.id;
-                    em.style.backgroundColor = HTML_ELEMENTS[obj.emType].color;
+                    em.style.backgroundColor = constants.HTML_ELEMENTS[obj.emType].color;
                     if (obj.emType === "img") em.src = "/svg/empty_image.svg";
                 
-                    label.textContent = obj.label || HTML_ELEMENTS[obj.emType].defaultLabel;
+                    label.textContent = obj.label || constants.HTML_ELEMENTS[obj.emType].defaultLabel;
                     em.appendChild(label);
 
                     if (obj.isContainer && obj.childObjects.length > 0) {

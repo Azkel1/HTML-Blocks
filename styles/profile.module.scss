@@ -34,6 +34,11 @@
         display: flex;
         flex-direction: column;
 
+        .containerEmptyContentRow {
+            text-align: center;
+            padding: 2em;
+        }
+
         .containerContentRow {
             display: grid;
             align-items: center;

@@ -31,14 +31,18 @@
         ul {
             display: flex;
             flex-direction: row;
-            list-style: none;
             align-items: center;
-        }
+            gap: 1em;
 
-        a:hover {
-            background-color: utils.shade(transparent, 10%);
-            border-bottom: 2px solid white;
-            border-width: 3px;
+            list-style: none;
+
+            > li {
+                > a:hover {
+                    background-color: utils.shade(transparent, 10%);
+                    border-bottom: 2px solid white;
+                    border-width: 3px;
+                }
+            }
         }
     }
 

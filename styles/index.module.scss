@@ -1,0 +1,12 @@
+@use "utils.scss";
+@use "variables.scss";
+
+#mainContainer {
+    div {
+        @include utils.containerBase(variables.$primary);
+
+        > a {
+            @include utils.buttonBase(white, variables.$secondary, white);
+        }
+    }
+}

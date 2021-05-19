@@ -88,12 +88,26 @@ h4, h5, h6 {
     @include utils.messageBase("ok");
 }
 
+.custom-select {
+    width: 100%;
+
+    .custom-select__control {
+        
+        box-shadow: none;
+        border-color: none;
+    }
+}
+
 main {
     background-image: url("/img/homepage_background.png");
     background-position: bottom right;
     background-repeat: no-repeat;
 
     margin: 2em;
+}
+
+a, a:visited {
+    color: utils.shade(variables.$secondary, 30%);
 }
 
 /* --------------------------------------------- ANIMATIONS --------------------------------------------- */

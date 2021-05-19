@@ -59,15 +59,15 @@ export default function Header({ page }) {
                 <ul>
                     <li>
                         <Link href="/">
-                            <a>Enlace 1</a>
+                            <a>Inicio</a>
                         </Link>
                     </li>
+                    
                     <li>
-                        <Link href="/">
-                            <a>Enlace 2</a>
+                        <Link href="/about-us">
+                            <a>Sobre nosotros</a>
                         </Link>
                     </li>
-    
                 </ul>
             </nav>
             { headerButtons()}

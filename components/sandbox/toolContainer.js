@@ -1,5 +1,5 @@
 import React from "react";
-import { HTML_ELEMENTS } from "lib/constants";
+import constants from "lib/constants";
 import { EventEmitter } from "lib/events";
 
 import styles from "./toolContainer.module.scss";
@@ -12,7 +12,7 @@ export default class ToolContainer extends React.Component {
         super();
         this.emButtons = [];
 
-        for (let [key, value] of Object.entries(HTML_ELEMENTS)) {
+        for (let [key, value] of Object.entries(constants.HTML_ELEMENTS)) {
             this.emButtons.push(<button type="button" key={ key } style={ {backgroundColor: value.color} } onClick={ () => EventEmitter.dispatch("createCanvasItem", {emType: key}) }></button>
             );
         }

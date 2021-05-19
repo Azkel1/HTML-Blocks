@@ -19,14 +19,30 @@ export default function Profile() {
     
     if (data) {
         data.body.data.forEach(design => {
-            userDesigns.push(<div key={ design.name + design.creationDate } className={ styles.containerContentRow }>
-                <b>{ design.name }</b>
-                <em>{ parseDate(design.creationDate) }</em>
-                <Link href={ `/sandbox?design=${design.name}` }>
-                    <a>Editar</a>
-                </Link>
-            </div>);
+            userDesigns.push(
+                <div key={ design.name + design.creationDate } className={ styles.containerContentRow }>
+                    <b>{ design.name }</b>
+                    <em>{ parseDate(design.creationDate) }</em>
+                    <Link href={ `/sandbox?design=${design.name}` }>
+                        <a>Editar</a>
+                    </Link>
+                </div>
+            );
         });
+
+        if (userDesigns.length === 0) {
+            userDesigns.push(
+                <div key={ "emptyDesign" } className={ styles.containerEmptyContentRow }>
+                    <b>
+                        ------------------------------------------ Todavía no tienes ningún diseño&nbsp; 
+                        <Link href="/sandbox">
+                            <a>¡Crea uno!</a>
+                        </Link>
+                        &nbsp;------------------------------------------
+                    </b>
+                </div>
+            );
+        }
     }
 
     return (
@@ -40,7 +56,7 @@ export default function Profile() {
                 <h1 id={ styles.welcomeMessage }>Bienvenido a tu perfil!</h1>
 
                 <div id={ styles.userCard }>    {/* Implement ability to change user name and image */}
-                    <Image src={ user.image ? "/img/users/" + user.image : "" } layout="responsive" width="215" height="215" quality="100" alt="" />
+                    <Image src={ user.image ? "/img/users/" + user.image : "/svg/empty_image.svg" } layout="responsive" width="215" height="215" quality="100" alt="Imagen del usuario" />
 
                     <h3>{ user.name || "Nombre de usuario" }</h3>
                 </div>

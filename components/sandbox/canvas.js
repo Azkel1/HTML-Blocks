@@ -22,6 +22,7 @@ export default class SandboxCanvas extends React.Component {
 
         EventEmitter.subscribe("createCanvasItem", (data) => {
             this.canvas.addBlock(data);
+            EventEmitter.dispatch("renderHTML", this.canvas);
         });
 
         // TODO: If currently the canvas is not empty, ask the user before erasing all of his progress.
@@ -39,7 +40,7 @@ export default class SandboxCanvas extends React.Component {
             }
         });
 
-        // * Testing purposes only
+        // TODO: Remove
         /* this.canvas.addBlock({ top: 0, emType: "div", width: 400, height: 200 });
         this.canvas.addBlock({ top: 300, emType: "img" });
         this.canvas.addBlock({ top: 500, emType: "h1" }); */
