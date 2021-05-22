@@ -1,5 +1,6 @@
 @use "sass:color";
 @use "utils.scss";
+@use "variables.scss";
 
 #profile {
     display: grid;
@@ -73,10 +74,6 @@
     
         padding: 1.2em;
 
-        h3 {
-            margin: 1em 0 0 0;
-        }
-
         i {
             margin: 0 0 1em 1em;
         }
@@ -86,6 +83,80 @@
             border-radius: var(--border-radius);
             object-fit: cover;
             object-position: center;
+        }
+
+        label {
+            border-radius: var(--border-radius);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: absolute;
+            /* FIXME: Don't set a fixed height and width  */
+            width: 215px;
+            height: 215px;
+            z-index: 9999;
+
+            &:hover {
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, 0.3);
+            }
+
+            &:hover > svg {
+                display: block;
+            }
+
+            svg {
+                display: none;
+                stroke: white;
+            }
+
+            input {
+                display: none;
+            }
+        }
+
+        #detailsButtonsContainer {
+            display: none;
+            grid-template-columns: 1fr auto;
+            column-gap: 1em;
+
+            margin-top: 1em;
+
+            #saveUserDetailsButton {
+                @include utils.buttonBase(black, variables.$primary, white);
+            }
+
+            #cancelUserDetailsButton {
+                @include utils.buttonBase(white, variables.$red, white);
+            }
+        }
+        
+
+        #userNameLabel {
+            border-radius: var(--border-radius);
+            cursor: pointer;
+
+            margin: 1em 0 0 0;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        #userNameInput {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 0;
+            border-radius: var(--border-radius);
+            display: none;
+            outline: 0;
+            font-family: "Lovelo", Segoe UI, sans-serif;
+            font-size: 1.17em;
+
+            margin: 1em 0 0 0;
+            padding: 0.2em 0;
+            text-align: center;
         }
     }
 

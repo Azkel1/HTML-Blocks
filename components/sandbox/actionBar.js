@@ -1,7 +1,7 @@
 import { useModal, Modal } from "components";
 import React, { useEffect, useState } from "react";
 import { EventEmitter } from "lib/events";
-import { saveDesignToDB, saveDesignToCookie } from "lib/util";
+import { saveDesignToDB } from "lib/util";
 import constants from "lib/constants";
 import fetchJson from "lib/fetchJson";
 import useUser from "lib/useUser";
