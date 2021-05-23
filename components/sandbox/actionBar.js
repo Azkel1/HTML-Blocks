@@ -25,7 +25,7 @@ export default function ActionBar({ sandboxCanvasRef }) {
     // Update the canvas variable every time the reference updates.
     useEffect(() => {
         setCanvas(sandboxCanvasRef.current.canvas);
-    }, [{sandboxCanvasRef}]);
+    }, [{ sandboxCanvasRef }]);
 
     const saveDesign = async function(e, target) {
         if (target === "db") {
@@ -82,10 +82,15 @@ export default function ActionBar({ sandboxCanvasRef }) {
         }
     };
 
+    const emptyCanvas = () => {
+        EventEmitter.dispatch("emptyCanvas");
+    };
+
     return(
         <div id={ parentStyles.actionBar } className={ styles.mainContainer } >
             <button type="button" onClick={ user?.isLoggedIn ? toggleSaveModal : toggleLoginNotice }>Guardar diseño</button>
             <button type="button" onClick={ user?.isLoggedIn ? () => {toggleLoadModal(); getUserDesigns(); setSelectedDesign("");} : toggleLoginNotice }>Cargar diseño</button>
+            <button type="button" onClick={ emptyCanvas }>Vaciar canvas</button>
             
             <Modal isVisible={ isSaveVisible } hideModal={ () => {toggleSaveModal(); setMessage("");} } title="Guardar tu diseño">
                 <form id="design-save-form" onSubmit={ (e) => { saveDesign(e, "db"); } }>

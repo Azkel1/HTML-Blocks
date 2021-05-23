@@ -5,7 +5,20 @@ const db = require("lib/db").instance;
 export default withSession(async (req, res) => {
     const user = req.session.get("user");
 
-    if (req.method === "POST") {
+    switch(req.method) {
+    case "POST":
+        return uploadDesign();
+
+    default:
+    case "GET":
+        return getDesign();
+
+    case "DELETE":
+        return deleteDesign();
+
+    }
+
+    function uploadDesign() {
         return new Promise(() => {
             try {
                 db.none("INSERT INTO designs (email, name, data) VALUES ($1, $2, $3);", [user.email, req.body.name, req.body.data])
@@ -32,7 +45,9 @@ export default withSession(async (req, res) => {
                 });
             }
         });
-    } else {
+    }
+
+    function getDesign() {
         return new Promise(() => {
             // A name parameter is given, get the design from the user that matches it.
             if (req.query.name) {
@@ -86,6 +101,34 @@ export default withSession(async (req, res) => {
                 }
             }
         });
-        
+    }
+
+    function deleteDesign() {
+        return new Promise(() => {
+            try {
+                db.none("DELETE FROM designs WHERE email = $1 AND name = $2;", [user.email, req.body.name])
+                    .then(() => {
+                        res.status(200).json({
+                            ok: true,
+                            body: {
+                                text: "Diseño eliminado corectamente"
+                            }
+                        });
+                    })
+                    .catch(() => {
+                        res.status(200).json({
+                            ok: false,
+                            body: {
+                                text: "Error al eliminar el diseño"
+                            }
+                        });
+                    });
+            } catch (err) {
+                res.status(500).json({
+                    ok: false,
+                    body: err
+                });
+            }
+        });
     }
 });

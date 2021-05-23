@@ -55,6 +55,11 @@
             flex-direction: column;
             gap: 0.5em;
         }
+
+        > span {
+            display: inline-flex;
+            flex-wrap: wrap;
+        }
     }
 }
 

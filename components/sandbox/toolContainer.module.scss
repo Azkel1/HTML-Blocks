@@ -7,12 +7,20 @@
 
     button {
         background-color: utils.shade(transparent, 10%);
-        border: 0;
+        border: 0px solid rgba(0, 0, 0, 0.2);
         border-radius: var(--border-radius);
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         min-height: 50px;
+        transition: 0.4s border-radius;
 
         &:hover {
+            border-width: 2px;
+            border-radius: 15px;
+
             cursor: pointer;
         }
     }

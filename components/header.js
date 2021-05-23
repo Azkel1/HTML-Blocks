@@ -51,7 +51,7 @@ export default function Header({ page }) {
         <header className={ styles.header }>
             <Link href="/">
                 <a>
-                    <Image src="/svg/HTMLBlocks_logo_min.svg" width="300" height="50" alt="" />
+                    <Image src="/svg/HTMLBlocks_logo_min.svg" layout="fixed" width="300" height="50" alt="" />
                 </a>
             </Link>
     

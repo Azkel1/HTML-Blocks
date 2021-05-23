@@ -43,15 +43,20 @@
         .containerContentRow {
             display: grid;
             align-items: center;
-            grid-template-columns: 6fr 5fr 1fr;
+            grid-template-columns: 6fr 5fr 1fr 1fr;
+            column-gap: 0.5em;
 
             padding: 1.2em;
 
             a {
-                @include utils.buttonBase(white, #5f7fff, white);
+                @include utils.buttonBase(white, variables.$secondary, white);
                 
-                text-decoration: none;
                 padding: 0.3em 1em;
+            }
+
+            button {
+                @include utils.buttonBase(white, variables.$red);
+                padding: 0.8em;
             }
         }
 
@@ -71,6 +76,7 @@
         display: flex;
         flex-direction: column;
         text-align: center;
+        position: relative;
     
         padding: 1.2em;
 
@@ -89,13 +95,11 @@
             border-radius: var(--border-radius);
 
             display: flex;
-            align-items: center;
             justify-content: center;
 
             position: absolute;
-            /* FIXME: Don't set a fixed height and width  */
-            width: 215px;
-            height: 215px;
+            width: calc(100% - 1.2em * 2);
+            padding-top: calc(100% - 1.2em * 2);
             z-index: 9999;
 
             &:hover {
@@ -105,6 +109,8 @@
 
             &:hover > svg {
                 display: block;
+                position: absolute;
+                top: calc(50% - 12px);
             }
 
             svg {
@@ -130,6 +136,8 @@
 
             #cancelUserDetailsButton {
                 @include utils.buttonBase(white, variables.$red, white);
+
+                padding: 0.3em;
             }
         }
         

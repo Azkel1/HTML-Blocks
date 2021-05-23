@@ -13,7 +13,7 @@ import styles from "styles/profile.module.scss";
 export default function Profile() {
     let userDesigns = [];
     const { user, mutateUser: refreshUserData } = useUser({ redirectTo: "/auth" });
-    const { data } = useSWR("/api/designs");
+    const { data, mutate: refreshDesigns } = useSWR("/api/designs");
     const [newUserImage, setNewUserImage] = useState("");
     const [newUserName, setNewUserName] = useState("");
 
@@ -37,6 +37,7 @@ export default function Profile() {
                     <Link href={ `/sandbox?design=${design.name}` }>
                         <a>Editar</a>
                     </Link>
+                    <button type="button" onClick={ () => { deleteDesign(design.name); } }>Eliminar</button>
                 </div>
             );
         });
@@ -45,15 +46,28 @@ export default function Profile() {
             userDesigns.push(
                 <div key={ "emptyDesign" } className={ styles.containerEmptyContentRow }>
                     <b>
-                        ------------------------------------------ Todavía no tienes ningún diseño&nbsp; 
+                        Todavía no tienes ningún diseño&nbsp; 
                         <Link href="/sandbox">
                             <a>¡Crea uno!</a>
                         </Link>
-                        &nbsp;------------------------------------------
                     </b>
                 </div>
             );
         }
+    }
+
+    async function deleteDesign(designName) {
+        const response = await fetchJson("/api/designs",{
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: designName
+            })
+        });
+        refreshDesigns();
+
+        // TODO: Show ok message
+        console.log(response);
     }
 
     async function saveChanges() {
@@ -72,6 +86,7 @@ export default function Profile() {
         if (response.ok) {
             refreshUserData({...user, name: newUserName}, true);        
             setEditModeVisibility(false);
+            // TODO: Show ok message
         }
     }
 
@@ -133,9 +148,10 @@ export default function Profile() {
                     <input type="text" id={ styles.userNameInput } ref={ userNameInput } onChange={ (e) => {setNewUserName(e.target.value);} } defaultValue={ user.name || "Nombre de usuario" } maxLength="16"/>
                     <h3 id={ styles.userNameLabel } onClick={ () => (setEditModeVisibility(true)) } ref={ userNameLabel }>{ user.name || "Nombre de usuario" }</h3>
 
-                    {/* FIXME: Don't use so many refs */}
                     <div id={ styles.detailsButtonsContainer } ref={ userDetailsButtonContainer }>
-                        <button type="button" ref={ cancelUserDetailsButton } id={ styles.cancelUserDetailsButton } onClick={ () => (setEditModeVisibility(false)) }>X</button>
+                        <button type="button" ref={ cancelUserDetailsButton } id={ styles.cancelUserDetailsButton } onClick={ () => (setEditModeVisibility(false)) }>
+                            <Icon icon="x"/>
+                        </button>
                         <button type="button" ref={ saveUserDetailsButton } id={ styles.saveUserDetailsButton } onClick={ saveChanges }>Guardar cambios</button>
                     </div>
                 </div>
