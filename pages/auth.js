@@ -111,10 +111,10 @@ export default function Login() {
                         <input id="registerEmail" type="email" autoComplete="email" required />
 
                         <label htmlFor="registerPassword">Contraseña: </label>
-                        <input id="registerPassword" type="password" autoComplete="new-password" required />
+                        <input id="registerPassword" type="password" autoComplete="new-password" minLength="8" required />
 
                         <label htmlFor="registerPasswordConfirm">Confirmar contraseña: </label>
-                        <input id="registerPasswordConfirm" type="password" autoComplete="new-password" required />
+                        <input id="registerPasswordConfirm" type="password" autoComplete="new-password" minLength="8" required />
 
                         { message && <p className={ (message.type === "err") ? "errorMessage" : "okMessage" }>{message.text}</p> }
 

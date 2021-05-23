@@ -4,12 +4,16 @@ import React from "react";
 
 import styles from "./canvas.module.scss";
 
+/**
+ * Page canvas, where the blocks are added.
+ */
 export default class SandboxCanvas extends React.Component {
     constructor() {
         super();
         this.canvasContainer = React.createRef(); //Create reference to canvasContainer DOM node.
     }
 
+    // Wait for the component to be mounted into the page
     componentDidMount() {
         this.canvas = new Canvas("main-canvas", {
             width: this.canvasContainer.current.clientWidth,
@@ -18,12 +22,13 @@ export default class SandboxCanvas extends React.Component {
         });
         this.canvas.includeDefaultValues = false;
 
+        // When this event is captured create a new block with the given data
         EventEmitter.subscribe("createCanvasItem", (data) => {
             this.canvas.addBlock(data);
             EventEmitter.dispatch("renderHTML", this.canvas);
         });
 
-        // TODO: If currently the canvas is not empty, ask the user before erasing all of his progress.
+        // When this event is captured empty the canvas and load the given data onto it.
         EventEmitter.subscribe("loadSavedDesign", (data) => {
             if (data.objects) {
                 this.canvas.clear();
@@ -38,11 +43,13 @@ export default class SandboxCanvas extends React.Component {
             }
         });
 
+        // When this event is captured empty the canvas
         EventEmitter.subscribe("emptyCanvas", () => {
             this.canvas.clear();
             EventEmitter.dispatch("renderHTML", this.canvas);
         });
 
+        // Event listener used to resize the canvas when the page's size changes.
         // FIXME: When the page has to grow downwards to accomodate the newly created blocks, it doesn't fire a "resize" event, so the canvas dimensions don't get updated :(
         window.addEventListener("resize", () => {
             const container = document.querySelector(".canvas-container");

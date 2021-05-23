@@ -1,7 +1,6 @@
 import { useModal, Modal } from "components";
 import React, { useEffect, useState } from "react";
 import { EventEmitter } from "lib/events";
-import { saveDesignToDB } from "lib/util";
 import constants from "lib/constants";
 import fetchJson from "lib/fetchJson";
 import useUser from "lib/useUser";
@@ -11,45 +10,77 @@ import parentStyles from "styles/sandbox.module.scss";
 import styles from "./actionBar.module.scss";
 import { useRouter } from "next/router";
 
+/**
+ * Bar located on the top of the page. Used to add buttons that modify the canvas in some way.
+ * @param {React.MutableRefObject<undefined>} param0 Reference to the current canvas
+ */
 export default function ActionBar({ sandboxCanvasRef }) {
+    // Visibility variables and setter functions for the modals
     const {isVisible: isSaveVisible, toggleModal: toggleSaveModal} = useModal();
     const {isVisible: isLoadVisible, toggleModal: toggleLoadModal} = useModal();
     const {isVisible: isLoginNoticeVisible, toggleModal: toggleLoginNotice} = useModal();
-    const [message, setMessage] = useState("");
-    const [canvas, setCanvas] = useState("");
-    const [userDesigns, setUserDesigns] = useState([]);
-    const [selectedDesign, setSelectedDesign] = useState("");
-    const { user } = useUser();
-    const router = useRouter();
+
+    const [message, setMessage] = useState(""); // Message shown in the modals
+    const [canvas, setCanvas] = useState(""); // Sandbox's canvas. Used to save/load designs
+    const [userDesigns, setUserDesigns] = useState([]); // User designs loaded from the DB
+    const [selectedDesign, setSelectedDesign] = useState(""); // Selected design in the load design dropdown
+    const { user } = useUser(); // User info saved in the cookies
+    const router = useRouter(); // Used to redirect the user
 
     // Update the canvas variable every time the reference updates.
     useEffect(() => {
         setCanvas(sandboxCanvasRef.current.canvas);
     }, [{ sandboxCanvasRef }]);
 
-    const saveDesign = async function(e, target) {
+    /**
+     * 
+     * @param {Event} e Event originated when clicking the "Save design" button. Used to prevent the form from refreshing the page.
+     * @param {"db" | "local"} target Location where the design should be saved. The options are:
+     *  - "db": The design is uploaded to the database. Default
+     *  - "local": The design is saved to the browsers' local storage. This is used when the user is going to be redirected somewhere else  
+     *  and you don't want him to lose its progress.
+     * @returns 
+     */
+    const saveDesign = async function(e, target = "db") {
+        // Save the design to the DB
         if (target === "db") {
-            e.preventDefault();
+            e.preventDefault(); // Prevent the page from reloading
             const designName = document.forms["design-save-form"].querySelector("input").value.trim();
             
-            if (!designName) {
+            if (!designName) { //Error messag if the input is empty
                 setMessage({type: "err", text: "El nombre del diseño no puede estar vacío"});
                 return;
             }
 
-            const response = await saveDesignToDB(designName, canvas.toJSON(constants.CANVAS_PROPERTIES));
+            // Send the design info to the database to be saved
+            const response = await fetchJson("/api/designs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: designName,
+                    data: canvas.toJSON(constants.CANVAS_PROPERTIES)
+                })
+            });
 
+            // If there is an error while saving the design, show a message
             if (!response.ok) {
                 setMessage({type: "err", text: response.body.text});
-            } else {
+            } 
+            // If not, close the modal
+            else {
                 toggleSaveModal();
             }
-        } else {
+        } 
+        // Save the design to the browsers' local storage
+        else {
             window.localStorage.setItem("tempDesign", JSON.stringify(canvas.toJSON(constants.CANVAS_PROPERTIES)));
             router.push("/auth");
         }
     };
 
+    /**
+     * Fetch all of the current user designs from the DB and save them to be used by the load design dropdown
+     */
     const getUserDesigns = async function() {
         const { body: {data}} = await fetchJson("/api/designs");
         let response = [];
@@ -68,6 +99,10 @@ export default function ActionBar({ sandboxCanvasRef }) {
         }
     };
 
+    /**
+     * Get the info from the selected design in the dropdown and fire and event for it to be loaded into the canvas.
+     * @param {Event} e Event originated when clicking the "Load design" button. Used to prevent the form from refreshing the page.
+     */
     const loadDesign = async function(e) {
         e.preventDefault();
         
@@ -82,6 +117,9 @@ export default function ActionBar({ sandboxCanvasRef }) {
         }
     };
 
+    /**
+     * Empty the current canvas.
+     */
     const emptyCanvas = () => {
         EventEmitter.dispatch("emptyCanvas");
     };

@@ -18,6 +18,10 @@ export default withSession(async (req, res) => {
 
     }
 
+    /**
+     * Insert a new row in the "designs" table in the DB with the given data.
+     * @returns Promise to be resolved by the client.
+     */
     function uploadDesign() {
         return new Promise(() => {
             try {
@@ -47,6 +51,10 @@ export default withSession(async (req, res) => {
         });
     }
 
+    /**
+     * Gets the given design's info from the DB.
+     * @returns Promise to be resolved by the client.
+     */
     function getDesign() {
         return new Promise(() => {
             // A name parameter is given, get the design from the user that matches it.
@@ -103,6 +111,10 @@ export default withSession(async (req, res) => {
         });
     }
 
+    /**
+     * Delete the given design from the DB.
+     * @returns Promise to be resolved by the client.
+     */
     function deleteDesign() {
         return new Promise(() => {
             try {

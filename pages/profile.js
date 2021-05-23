@@ -143,7 +143,7 @@ export default function Profile() {
                         <input type="file" accept="image/*" onChange={ uploadProfilePicture }></input>
                     </label>
                     
-                    <Image src={ user.image ? "/img/users/" + user.image : "/svg/empty_image.svg" } layout="responsive" width="215" height="215" quality="100" alt="Imagen del usuario" />
+                    <Image src={ user.image ? "/img/users/" + user.image : "/svg/empty_image.svg" } layout="responsive" width="215" height="215" quality="100" alt="Imagen del usuario" priority={ true }/>
 
                     <input type="text" id={ styles.userNameInput } ref={ userNameInput } onChange={ (e) => {setNewUserName(e.target.value);} } defaultValue={ user.name || "Nombre de usuario" } maxLength="16"/>
                     <h3 id={ styles.userNameLabel } onClick={ () => (setEditModeVisibility(true)) } ref={ userNameLabel }>{ user.name || "Nombre de usuario" }</h3>

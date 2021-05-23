@@ -19,7 +19,7 @@
 
         &:hover {
             border-width: 2px;
-            border-radius: 15px;
+            border-radius: calc(var(--border-radius) * 2);
 
             cursor: pointer;
         }

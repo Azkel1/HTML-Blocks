@@ -1,12 +1,111 @@
 @use "utils.scss";
 @use "variables.scss";
+@use "sass:color";
 
 #mainContainer {
-    div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+
+    #welcomeContainer {
         @include utils.containerBase(variables.$primary);
+    }
+
+    #blocksContainer {
+        @include utils.containerBase(variables.$secondary);
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        > h1, > p {
+            margin: 0
+        }
+
+        .blockDisplay {
+            @include utils.containerBase(transparent); //@include utils.containerBase(transparentize(variables.$primary, $amount: 0.5));
+            width: 100%;
+            align-self: center;
+    
+            display: flex;
+            gap: 1em;
+    
+            div {
+                @include utils.containerBase(transparent);
+
+                flex-basis: calc(25% - (1em / 2));
+    
+                cursor: pointer;
+                transition: 1s;
+                overflow: hidden;
+                padding-bottom: 1em;
+                height: 10em;
+    
+                > span {
+                    display: flex;
+                    gap: 0.7em;
+                    align-items: center;
+
+                    font-weight: 500;
+                    font-size: 1.2em;
+
+                    > svg {
+                        overflow: unset;
+                    }
+                }
+    
+                > p {
+                    opacity: 0.3;
+                    transition: 1s;
+                    margin-bottom: 0;
+                }
+    
+                &:hover {
+                    flex: 1 0 55%;
+                    
+    
+                    > p {
+                        display: block !important;
+    
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+    
+    #tryItContainer {
+        @include utils.containerBase(variables.$orange);
 
         > a {
             @include utils.buttonBase(white, variables.$secondary, white);
+        }
+    }
+}
+
+/* -------------------------------------------- MEDIA QUERIES -------------------------------------------- */
+
+@media only screen and (max-width: 1024px) {
+    #mainContainer {
+        #blocksContainer {
+            .blockDisplay {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    #mainContainer {
+        #blocksContainer {
+            .blockDisplay {
+                flex-direction: column;
+    
+                div {
+                    > p {
+                        opacity: 1;
+                    }
+                }
+            }
         }
     }
 }
