@@ -30,7 +30,7 @@ export default withSession(async (req, res) => {
                         res.status(200).json({
                             ok: true,
                             body: {
-                                text: "Diseño guardado corectamente"
+                                text: "Diseño guardado correctamente"
                             }
                         });
                     })
