@@ -20,6 +20,7 @@ export default function ActionBar({ sandboxCanvasRef }) {
     const {isVisible: isLoadVisible, toggleModal: toggleLoadModal} = useModal();
     const {isVisible: isLoginNoticeVisible, toggleModal: toggleLoginNotice} = useModal();
 
+    const [currentDesign, setCurrentDesign] = useState("Diseño sin guardar");
     const [message, setMessage] = useState(""); // Message shown in the modals
     const [canvas, setCanvas] = useState(""); // Sandbox's canvas. Used to save/load designs
     const [userDesigns, setUserDesigns] = useState([]); // User designs loaded from the DB
@@ -42,39 +43,47 @@ export default function ActionBar({ sandboxCanvasRef }) {
      * @returns 
      */
     const saveDesign = async function(e, target = "db") {
-        // Save the design to the DB
-        if (target === "db") {
-            e.preventDefault(); // Prevent the page from reloading
-            const designName = document.forms["design-save-form"].querySelector("input").value.trim();
-            
-            if (!designName) { //Error messag if the input is empty
-                setMessage({type: "err", text: "El nombre del diseño no puede estar vacío"});
-                return;
-            }
+        e.preventDefault(); // Prevent the page from reloading
+        const canvasData = canvas.toJSON(constants.CANVAS_PROPERTIES);
 
-            // Send the design info to the database to be saved
-            const response = await fetchJson("/api/designs", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: designName,
-                    data: canvas.toJSON(constants.CANVAS_PROPERTIES)
-                })
-            });
-
-            // If there is an error while saving the design, show a message
-            if (!response.ok) {
-                setMessage({type: "err", text: response.body.text});
-            } 
-            // If not, close the modal
-            else {
-                toggleSaveModal();
-            }
-        } 
-        // Save the design to the browsers' local storage
+        if (canvasData.objects.length === 0) {
+            if (target === "db") setMessage({type: "err", text: "No se puede guardar un diseño vacío"});
+        }
         else {
-            window.localStorage.setItem("tempDesign", JSON.stringify(canvas.toJSON(constants.CANVAS_PROPERTIES)));
-            router.push("/auth");
+            // Save the design to the DB
+            if (target === "db") {
+                const designName = document.forms["design-save-form"].querySelector("input").value.trim();
+                
+                if (!designName) { //Error messag if the input is empty
+                    setMessage({type: "err", text: "El nombre del diseño no puede estar vacío"});
+                    return;
+                }
+
+                // Send the design info to the database to be saved
+                const response = await fetchJson("/api/designs", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: designName.toLowerCase(),
+                        data: canvasData
+                    })
+                });
+
+                // If there is an error while saving the design, show a message
+                if (!response.ok) {
+                    setMessage({type: "err", text: response.body.text});
+                } 
+                // If not, show an ok message
+                else {
+                    setCurrentDesign(designName);
+                    setMessage({type: "ok", text: response.body.text});
+                }
+            } 
+            // Save the design to the browsers' local storage
+            else {
+                window.localStorage.setItem("tempDesign", JSON.stringify(canvas.toJSON(constants.CANVAS_PROPERTIES)));
+                router.push("/auth");
+            }
         }
     };
 
@@ -112,6 +121,7 @@ export default function ActionBar({ sandboxCanvasRef }) {
                 headers: { "Content-Type": "application/json" }
             });
     
+            setCurrentDesign(selectedDesign.value);
             EventEmitter.dispatch("loadSavedDesign", response.body.data);
             toggleLoadModal();
         }
@@ -129,6 +139,7 @@ export default function ActionBar({ sandboxCanvasRef }) {
             <button type="button" onClick={ user?.isLoggedIn ? toggleSaveModal : toggleLoginNotice }>Guardar diseño</button>
             <button type="button" onClick={ user?.isLoggedIn ? () => {toggleLoadModal(); getUserDesigns(); setSelectedDesign("");} : toggleLoginNotice }>Cargar diseño</button>
             <button type="button" onClick={ emptyCanvas }>Vaciar canvas</button>
+            <b id={ styles.designName }>{ currentDesign }</b>
             
             <Modal isVisible={ isSaveVisible } hideModal={ () => {toggleSaveModal(); setMessage("");} } title="Guardar tu diseño">
                 <form id="design-save-form" onSubmit={ (e) => { saveDesign(e, "db"); } }>

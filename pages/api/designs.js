@@ -34,11 +34,11 @@ export default withSession(async (req, res) => {
                             }
                         });
                     })
-                    .catch(() => {
+                    .catch((e) => {
                         res.status(200).json({
                             ok: false,
                             body: {
-                                text: "Error al guardar el diseño"
+                                text: (e.code === "23505") ? "Ya existe un diseño con ese nombre" : "Error al guardar el diseño"
                             }
                         });
                     });

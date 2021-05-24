@@ -53,17 +53,19 @@ export default class SandboxCanvas extends React.Component {
         // FIXME: When the page has to grow downwards to accomodate the newly created blocks, it doesn't fire a "resize" event, so the canvas dimensions don't get updated :(
         window.addEventListener("resize", () => {
             const container = document.querySelector(".canvas-container");
-            
-            // Set height & width to 0 so the parent div can resize
-            container.style.width = 0;
-            container.style.height = 0;
 
             // Get the current width & height from the parent div. Canvas properties will update automatically
             try { // FIXME: Sometimes it causes an exception, I don't know why. Maybe it has something to do with the browser live reload.
-                this.canvas.setWidth(this.canvasContainer.current.clientWidth);
-                this.canvas.setHeight(this.canvasContainer.current.clientHeight);
+                // Set height & width to 0 so the parent div can resize
+                if (container) {
+                    container.style.width = 0;
+                    container.style.height = 0;
+
+                    this.canvas.setWidth(this.canvasContainer.current.clientWidth);
+                    this.canvas.setHeight(this.canvasContainer.current.clientHeight);
+                }
             } catch (e) {
-                console.error(e);
+                //Error message
             }
         });
     }

@@ -3,11 +3,16 @@
 
 .mainContainer {
     display: flex;
+    align-items: center;
     gap: 1em;
 
     button {
         @include utils.buttonBase(black, variables.$secondary);
         
         font-weight: normal;
+    }
+
+    #designName {
+        margin-left: auto;
     }
 }
