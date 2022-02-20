@@ -3,7 +3,7 @@ import withSession from "lib/session";
 const db = require("lib/db").instance;
 
 export default withSession(async (req, res) => {
-    const user = req.session.get("user");
+    const user = req.session.user;
 
     switch(req.method) {
     case "POST":

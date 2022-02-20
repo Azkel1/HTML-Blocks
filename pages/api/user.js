@@ -5,7 +5,7 @@ const crypto = require("crypto");
 import withSession from "lib/session";
 
 export default withSession(async (req, res) => {
-    const user = req.session.get("user");
+    const user = req.session.user;
     
     // Get user info
     if (req.method === "GET") {
@@ -39,7 +39,7 @@ export default withSession(async (req, res) => {
                 }
 
                 db.none("UPDATE users SET image = $1, name = $2 WHERE email = $3;", [newUserInfo.imageName, newUserInfo.userName, user.email]).then(() => {
-                    req.session.set("user", {...user, name: newUserInfo.userName});
+                    req.session.user = {...user, name: newUserInfo.userName};
                     req.session.save().then(() => {
                         res.status(200).json({
                             ok: true,

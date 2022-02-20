@@ -20,7 +20,7 @@ export default withSession(async (req, res) => {
                         isLoggedIn: true 
                     };
     
-                    req.session.set("user", user);
+                    req.session.user = user;
                     req.session.save().then(() => {
                         res.status(200).json({
                             ok: true, 
